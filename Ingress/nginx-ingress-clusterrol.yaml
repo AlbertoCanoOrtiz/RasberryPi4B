@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kinde: ClusterRol
+metadata:
+  namespace: nginx-ingress
+  name: nginx-ingress-manager
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
