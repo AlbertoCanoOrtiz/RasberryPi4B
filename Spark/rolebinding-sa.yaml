@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: spark-sa-binding
+  namespace: spark
+subjects:
+  - kind: ServiceAccount
+    name: spark-sa
+    namespace: spark
+roleRef:
+  kind: Role
+  name: spark-manager
+  apiGroup: rbac.authorization.k8s.io
