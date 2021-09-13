@@ -1,4 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 
+  name: argo-deployment
+spec:
+  containers:
+  - args:
+    - server
+    env:
+      -name: BASE_HREF
+       value: /argo/
+    image: arogoproj/argocli:latest
+    name:  argo-server
