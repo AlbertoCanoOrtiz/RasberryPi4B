@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/vi
+kind: ClusterRolBinding
+metadata:
+  name: argo-manager-binding
+  namespace: argo
+subjects:
+  kind: User
+  name: argo
+  apiGroup: ""
+rolRef:
+  kind: ClusterRol
+  name: argo-manager
+  apiGroup: ""
