@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.v1beta1
+kind: Ingress
+metadata:
+  name: Ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: version.raspberry.py
+    http:
+      paths:
+      - backend:
+          serviceName: 
+          servicePort:         
