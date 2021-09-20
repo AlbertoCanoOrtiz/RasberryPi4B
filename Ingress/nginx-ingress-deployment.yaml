@@ -11,27 +11,27 @@ spec:
   template:
     metadata:
       labels:
-        app: nginx-ingres-app
+        app: nginx-ingress-app
     spec:
       serviceAccountName: nginx-ingress-sa
       containers:
       - image: nginx/nginx-ingress:edge
         imagePullPolicy: Always
-	name: nginx-ingress-container
-	ports:
-	- name: http
-	  containerPort: 80
-	- name: https
-	  cotainerPort: 443
-	env:
-	- name: POD_NAMESPACE
-	  valueFrom:
-	    fieldRef:
-	      fielPath: metadata.namespace
-	- name: POD_NAME
-	  valueFrom:
-	    fieldRef:
-	      fieldPath: metadata.name
-	args:
-	  - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
-	  - -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
+        name: nginx-ingress-container
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        args:
+          - -nginx-configmaps=$(POD_NAMESPACE)/nginx-ingress-cm
+          - -default-server-tls-secret=$(POD_NAMESPACE)/nginx-ingress-secret
