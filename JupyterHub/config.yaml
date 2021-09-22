@@ -1,0 +1,8 @@
+helm upgrade --cleanup-on-fail \
+  --install jupyterhub.v.1 jupyterhub/jupyterhub \
+  --namespace jupyterhub \
+  --create-namespace \
+  --version= 1.4.2 \
+  --debug
+#--values config.yaml
+  
