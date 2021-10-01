@@ -30,9 +30,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.0.6
             - name: NFS_PATH
-              value: /ifs/kubernetes
+              value: /mnt/nfsShare/
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.0.6
-            path: /ifs/kubernetes
+            path: /mnt/nfsShare/
