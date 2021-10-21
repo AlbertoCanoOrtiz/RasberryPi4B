@@ -23,7 +23,7 @@ spec:
           image: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
           volumeMounts:
             - name: nfs-client-root
-              mountPath: /persistentVolumes
+              mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
               value: k8s-sigs.io/nfs-subdir-external-provisioner
