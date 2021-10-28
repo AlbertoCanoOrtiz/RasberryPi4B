@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata: 
+  name: ingress-jupyterhub
+  namespace: nfs
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: raspberrypi.jupyterhub.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: proxy-public
+            port:
+              number: 80
+  defaultBackend:
+    service:
+      name: proxy-public
+      port:
+        number: 80
