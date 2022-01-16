@@ -6,3 +6,6 @@ helm upgrade \
   --debug
 #--values config.yaml
   
+
+
+helm show jupyterhub/jupyterhub
