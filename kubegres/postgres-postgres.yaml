@@ -1,0 +1,33 @@
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: api-postgres
+  namespace: postgres
+spec:
+  replicas: 3
+  image: postgres:14.1
+  port: 5432
+
+  database:
+    size: 20Gi
+    storageClassName: managed-nfs-storage
+
+  resources:
+    limits:
+      memory: "32Gi"
+      cpu: "8"
+    requests:
+      memory: "4Gi"
+      cpu: "2"
+  env:
+    - name: POSTGRES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: postgres-secret
+          key: superUserPassword
+
+    - name: POSTGRES_REPLICATION_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: postgres-secret
+          key: replicationUserPassword
