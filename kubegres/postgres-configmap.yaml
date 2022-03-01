@@ -26,7 +26,7 @@ data:
 
     CREATE DATABASE $customDatabaseName;
     \c $customDatabaseName;
-    CREATE USER $customUserName;
+    CREATE USER $customUserName WITH PASSWORD '$POSTGRES_PASSWORD';
     CREATE SCHEMA $customSchema;
     CREATE ROLE $customRole;
 
@@ -34,6 +34,7 @@ data:
     GRANT CONNECT ON DATABASE $customDatabaseName TO $POSTGRES_USER;
     GRANT USAGE ON SCHEMA $customSchema TO $customUserName;
     GRANT ALL PRIVILEGES ON DATABASE $customDatabaseName to $customUserName;
+    COMMIT;
     
     EOSQL
 
