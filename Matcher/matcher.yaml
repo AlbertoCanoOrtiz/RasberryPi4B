@@ -1,0 +1,292 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: 'Matcher'
+servers:
+  - url: 'localhost:3000'
+tags:
+  - name: sociopaths
+    description: People who causing harm or suffering to animals previously adopted.
+  - name: animals
+    description: Animals in sources like animal shelters and rescue groups.
+  - name: partnerships
+    description: Rescue groups. 
+  - name: adopters
+    description: People who want pets. 
+paths:
+  /animal:
+    get: 
+      summary: 'Sample endpoint: Returns details about all animals in the shelter'
+      tags:
+        - animal
+      responses:
+        '200':
+          description: 'Sample response: Returns details about'
+          content: 
+            application/json: 
+              schema : 
+                $ref: '#/components/schemas/animal'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /sociophat:
+    get:
+      summary: 'Sample endpoint: Returns details about all sociophats'
+      tags:
+       - sociopath
+      responses:
+        '200':
+          description: 'Sample response: Returns details about'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sociopath'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /adopter:
+    get:
+      summary: 'Sample endpoint: Return details about all adopters'
+      tags:
+        - adopter
+      responses:
+        '200':
+          description: 'Sample response: Returns details about'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/adopter'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /partnership:
+    get:
+      summary: 'Sample endpoint: Return details about all partnerships'
+      tags:
+        - partnership
+      responses:
+        '200':
+          description: 'Sample response: Returns details about'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partnership'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  schemas:
+    error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    animal:
+      type: object
+      required: 
+        - size
+        - color
+        - breed
+      properties:
+        size:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        body:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        chest:
+          type: integer
+          format: int32
+          minimum: 0 
+          maximum: 100
+        neck:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        breed:
+          type: string
+          pattern: '^\d{10}'
+          minLength: 10
+        signDate:
+          type: string
+          format: date-time
+          nullable: false
+        statusInd:
+          type: boolean
+          nullable: false
+    sociophat:    
+      type: object 
+      required:
+        - street
+        - number
+      properties:
+        rfc: 
+          type: string
+          pattern: '[a-zA-Z0-9]+'
+          minLength: 13
+        street: 
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1 
+          maxLength: 100
+        number: 
+          type: integer
+          format: int32
+        secction:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        district:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        village:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        country:
+          type: string
+          pattern: '\w'
+          minLength: 1
+          maxLength: 100
+        code:
+          type: integer
+          pattern: '\d{5}'
+          format: int32
+        signDate:
+          type: string
+          format: date-time
+    adopter:
+      type: object
+      required: 
+       - rfc
+      properties:
+        rfc: 
+          type: string
+          pattern: '[a-zA-Z0-9]+'
+          minLength: 13
+          nullable: false
+        street: 
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1 
+          maxLength: 100
+        number: 
+          type: integer
+          format: int32
+        secction:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        district:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        village:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        country:
+          type: string
+          pattern: '\w'
+          minLength: 1
+          maxLength: 100
+        code:
+          type: integer
+          pattern: '\d{5}'
+          format: int32
+        signDate:
+          type: string
+          format: date-time
+    partnership:
+      type: object
+      required:
+        - rfc
+      properties:
+        rfc:
+          type: string
+          pattern: '[a-zA-Z0-9]+'
+          minLength: 13  
+          nullable : false
+        street: 
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1 
+          maxLength: 100
+        number: 
+          type: integer
+          format: int32
+        secction:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        district:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        village:
+          type: string
+          pattern: '\w'
+          nullable: false
+          minLength: 1
+          maxLength: 100
+        country:
+          type: string
+          pattern: '\w'
+          minLength: 1
+          maxLength: 100
+        code:
+          type: integer
+          pattern: '\d{5}'
+          format: int32
+        signDate:
+          type: string
+          format: date-time
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: []
