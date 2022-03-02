@@ -33,9 +33,21 @@ data:
     GRANT CONNECT ON DATABASE $customDatabaseName TO $customUserName;
     GRANT CONNECT ON DATABASE $customDatabaseName TO $POSTGRES_USER;
     GRANT USAGE ON SCHEMA $customSchema TO $customUserName;
-    GRANT ALL PRIVILEGES ON DATABASE $customDatabaseName to $customUserName;
-    COMMIT;
+    GRANT ALL PRIVILEGES ON SCHEMA $customSchema to $customUserName;
+
+    CREATE TABLE $customSchema.animal(size integer, body integer, chest integer, neck integer, breed integer, signDate timestamp without time zone, statusInd boolean);
     
+    CREATE TABLE $customSchema.sociophats(rfc varchar(100), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, signDate timestamp without time zone);
+
+    CREATE TABLE $customSchema.adopter(rfc varchar(100), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, signDate timestamp without time zone);
+
+    CREATE TABLE $customSchema.partnership(rfc varchar(100),street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, signDate timestamp without time zone);
+    
+    GRANT select, insert, update ON TABLE $customSchema.animal TO $customUserName;
+    GRANT select, insert, update ON TABLE $customSchema.sociophats TO $customUserName;
+    GRANT select, insert, update ON TABLE $customSchema.adopter TO $customUserName;
+    GRANT select, insert, update ON TABLE $customSchema.partnership TO $customUserName;
+
     EOSQL
 
     echo "$dt - Init script is completed";
