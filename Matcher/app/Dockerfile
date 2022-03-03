@@ -4,7 +4,7 @@ WORKDIR /usr/src/api
 
 COPY requirements.txt ./
 
-RUN pip install -r requirements \
+RUN apt -y install libpq-dev python3.7-dev &&  pip3 install -r requirements \
   && rm -rf /root/.cache/pip
 
 COPY . .
