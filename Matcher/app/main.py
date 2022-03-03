@@ -8,7 +8,7 @@ from typing import Union
 
 from fastapi import FastAPI
 
-from .models import Adopter, Animal, Error, Partnership, Sociopath
+from models import Adopter, Animal, Error, Partnership, Sociophat
 
 from .database import SessionLocal, engine
 
