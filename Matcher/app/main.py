@@ -8,9 +8,9 @@ from typing import Union
 
 from fastapi import FastAPI
 
-from .models import Adopter, Animal, Error, Partnership, Sociopath
+from models import Adopter, Animal, Error, Partnership, Sociophat
 
-from .database import SessionLocal, engine
+from database import SessionLocal, engine
 
 app = FastAPI(version='1.0', title='Matcher', servers=[{'url': 'localhost:3000'}], )
 
@@ -43,9 +43,9 @@ def get_partnership() -> Union[Partnership, Error]:
 
 
 @app.get(
-    '/sociophat', response_model=Sociopath, responses={'default': {'model': Error}}
+    '/sociophat', response_model=Sociophat, responses={'default': {'model': Error}}
 )
-def get_sociophat() -> Union[Sociopath, Error]:
+def get_sociophat() -> Union[Sociophat, Error]:
     """
     Sample endpoint: Returns details about all sociophats
     """
