@@ -7,3 +7,6 @@ COPY requirements.txt ./
 RUN pip install -r requirements \
   && rm -rf /root/.cache/pip
 
+COPY . .
+
+ENTRYPOINT['uvicorn','main:app']
