@@ -4,7 +4,9 @@ WORKDIR /usr/src/api
 
 COPY requirements ./
 
-RUN pip3 install -r requirements \
+RUN  apt-get update -y && apt-get install --yes --no-install-recommends \
+  libpq-dev gcc g++ \
+  && pip3 install -r requirements \
   && rm -rf /root/.cache/pip
 
 COPY . .
