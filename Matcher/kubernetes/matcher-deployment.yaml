@@ -1,0 +1,22 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: matcher-deployment
+  namespace: postgres
+  labels:
+    app: matcher-pod
+spec:
+  replicas: 3
+  selector:
+    matchLables:
+      app: matcher-pod
+  template:
+    metadata:
+      labels:
+        app: matcher-pod
+    spec:
+      containers:
+      - name: matcher-pod
+        image:
+        ports:
+        - containerPort:
