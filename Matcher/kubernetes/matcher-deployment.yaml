@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: matcher-pod
-        image:
+        image: 19911995/matcher:v1
         ports:
-        - containerPort:
+        - containerPort: 3000
