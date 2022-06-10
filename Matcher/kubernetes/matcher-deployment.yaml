@@ -20,3 +20,24 @@ spec:
         image: 19911995/matcher:v1
         ports:
         - containerPort: 3000
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: superUserPassword
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: matcher-configmap
+                key: postgresUser
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: matcher-configmap
+                key: postgresHost
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: matcher-configmap
+                key: postgresDatabase
