@@ -14,6 +14,8 @@ from database import SessionLocal, engine
 
 import schemas, crud
 
+from sqlalchemy.orm import Session
+
 schemas.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(version='1.0', title='Matcher', servers=[{'url': 'localhost:3000'}], )
