@@ -6,47 +6,49 @@
 
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 
 from models import Adopter, Animal, Error, Partnership, Sociophat
 
 from database import SessionLocal, engine
 
+import schemas, crud
+
+schemas.Base.metadata.create_all(bind=engine)
+
 app = FastAPI(version='1.0', title='Matcher', servers=[{'url': 'localhost:3000'}], )
 
+def get_db():
+  db = SessionLocal()
+  try:
+    yield db
+  finally:
+    db.close()
 
 
 @app.get('/adopter', response_model=Adopter, responses={'default': {'model': Error}})
-def get_adopter() -> Union[Adopter, Error]:
-    """
-    Sample endpoint: Return details about all adopters
-    """
-    pass
+def get_adopter( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Adopter, Error]:
+  adopter = crud.get_adopter_(skip=skip, limit=limit, db = db)
+  return adopter
 
 
 @app.get('/animal', response_model=Animal, responses={'default': {'model': Error}})
-def get_animal() -> Union[Animal, Error]:
-    """
-    Sample endpoint: Returns details about all animals in the shelter
-    """
-    pass
+def get_animal( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Animal, Error]:
+  animal = crud.get_animal_(skip = skip, limit = limit, db = db)
+  return animal
 
 
 @app.get(
     '/partnership', response_model=Partnership, responses={'default': {'model': Error}}
 )
-def get_partnership() -> Union[Partnership, Error]:
-    """
-    Sample endpoint: Return details about all partnerships
-    """
-    pass
+def get_partnership( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Partnership, Error]:
+  partnership = crud.get_partnership_(skip = skip, limit = limit, db = db)
+  return partnership
 
 
 @app.get(
     '/sociophat', response_model=Sociophat, responses={'default': {'model': Error}}
 )
-def get_sociophat() -> Union[Sociophat, Error]:
-    """
-    Sample endpoint: Returns details about all sociophats
-    """
-    pass
+def get_sociophat( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Sociophat, Error]:
+  sociophat = crud.get_sociophat_(skip = skip, limit = limit, db = db)
+  return sociophat
