@@ -18,6 +18,7 @@ spec:
       containers:
       - name: matcher-pod
         image: 19911995/matcher:0.2
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
