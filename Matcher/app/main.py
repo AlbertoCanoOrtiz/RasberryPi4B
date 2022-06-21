@@ -8,7 +8,7 @@ from typing import Union
 
 from fastapi import Depends, FastAPI, HTTPException
 
-from models import Adopter, Animal, Error, Partnership, Sociophat
+from models import Adopter, Animal, Error, Partnership, Sociopath
 
 from database import SessionLocal, engine
 
@@ -49,8 +49,8 @@ def get_partnership( skip: int = 0, limit: int= 0, db: Session = Depends(get_db)
 
 
 @app.get(
-    '/sociophat', response_model=Sociophat, responses={'default': {'model': Error}}
+    '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
-def get_sociophat( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Sociophat, Error]:
-  sociophat = crud.get_sociophat_(skip = skip, limit = limit, db = db)
-  return sociophat
+def get_sociopath( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Sociopath, Error]:
+  sociopath = crud.get_sociopath_(skip = skip, limit = limit, db = db)
+  return sociopath

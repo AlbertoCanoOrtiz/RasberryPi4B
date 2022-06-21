@@ -12,8 +12,8 @@ class Animal(Base):
   signDate = Column(DateTime)
   statusInd = Column(Boolean, default = True)
 
-class Sociophat(Base):
-  __tablename__ = 'sociophat'
+class Sociopath(Base):
+  __tablename__ = 'sociopath'
   rfc =	Column(String(100),primary_key = True)
   street = Column(String(100))
   number = Column(Integer)

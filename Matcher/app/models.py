@@ -25,7 +25,7 @@ class Animal(BaseModel):
     statusInd: Optional[bool] = None
 
 
-class Sociophat(BaseModel):
+class Sociopath(BaseModel):
     rfc: Optional[constr(regex=r'[a-zA-Z0-9]+', min_length=13)] = None
     street: constr(regex=r'\w', min_length=1, max_length=100)
     number: int
