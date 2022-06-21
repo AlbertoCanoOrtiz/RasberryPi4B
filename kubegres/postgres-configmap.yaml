@@ -49,7 +49,7 @@ data:
     INSERT INTO $customSchema.partnership VALUES ('CAOA911130HDFNRL05', 'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470, to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
  
     GRANT select, insert, update ON TABLE $customSchema.animal TO $customUserName;
-    GRANT select, insert, update ON TABLE $customSchema.sociophats TO $customUserName;
+    GRANT select, insert, update ON TABLE $customSchema.sociopath TO $customUserName;
     GRANT select, insert, update ON TABLE $customSchema.adopter TO $customUserName;
     GRANT select, insert, update ON TABLE $customSchema.partnership TO $customUserName;
 
