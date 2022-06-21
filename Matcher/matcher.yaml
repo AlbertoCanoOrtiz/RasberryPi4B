@@ -32,7 +32,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /sociophat:
+  /sociopath:
     get:
       summary: 'Sample endpoint: Returns details about all sociophats'
       tags:
