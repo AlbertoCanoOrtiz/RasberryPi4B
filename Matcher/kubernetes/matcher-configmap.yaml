@@ -7,3 +7,4 @@ data:
   postgresUser: admin
   postgresHost: api-postgres
   postgresDatabase: opematraw
+  postgresSchema: matcher

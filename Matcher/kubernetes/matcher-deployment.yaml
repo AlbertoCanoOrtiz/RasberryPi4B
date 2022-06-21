@@ -42,3 +42,8 @@ spec:
               configMapKeyRef:
                 name: matcher-configmap
                 key: postgresDatabase
+          - name: POSTGRES_SCHEMA
+            valueFrom:
+              configMapKeyRef:
+                name: matcher-configmap
+                key: postgresSchema
