@@ -20,7 +20,7 @@ class Animal(BaseModel):
     body: Optional[conint(ge=0, le=100)] = None
     chest: Optional[conint(ge=0, le=100)] = None
     neck: Optional[conint(ge=0, le=100)] = None
-    breed: constr(regex=r'^\d{10}', min_length=10)
+    breed: constr(regex=r'\w', min_length=10)
     signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
 

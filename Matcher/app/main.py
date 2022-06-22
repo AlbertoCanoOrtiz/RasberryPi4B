@@ -29,13 +29,13 @@ def get_db():
 
 
 @app.get('/adopter', response_model=Adopter, responses={'default': {'model': Error}})
-def get_adopter( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Adopter, Error]:
+def get_adopter( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Adopter, Error]:
   adopter = crud.get_adopter_(skip=skip, limit=limit, db = db)
   return adopter
 
 
 @app.get('/animal', response_model=Animal, responses={'default': {'model': Error}})
-def get_animal( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Animal, Error]:
+def get_animal( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Animal, Error]:
   animal = crud.get_animal_(skip = skip, limit = limit, db = db)
   return animal
 
@@ -43,7 +43,7 @@ def get_animal( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) ->
 @app.get(
     '/partnership', response_model=Partnership, responses={'default': {'model': Error}}
 )
-def get_partnership( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Partnership, Error]:
+def get_partnership( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Partnership, Error]:
   partnership = crud.get_partnership_(skip = skip, limit = limit, db = db)
   return partnership
 
@@ -51,6 +51,6 @@ def get_partnership( skip: int = 0, limit: int= 0, db: Session = Depends(get_db)
 @app.get(
     '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
-def get_sociopath( skip: int = 0, limit: int= 0, db: Session = Depends(get_db) ) -> Union[Sociopath, Error]:
+def get_sociopath( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Sociopath, Error]:
   sociopath = crud.get_sociopath_(skip = skip, limit = limit, db = db)
   return sociopath
