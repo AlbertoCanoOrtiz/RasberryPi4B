@@ -4,11 +4,15 @@
 
 #from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 
-from fastapi import Depends, FastAPI, HTTPException
+from datetime import datetime
 
-from models import Adopter, Animal, Error, Partnership, Sociopath
+from fastapi import Depends, FastAPI, HTTPException, Query
+
+from pydantic import conint, constr
+
+from models import Adopter, Animal, Color, Error, Partnership, Sociopath, Success 
 
 from database import SessionLocal, engine
 
@@ -29,28 +33,155 @@ def get_db():
 
 
 @app.get('/adopter', response_model=Adopter, responses={'default': {'model': Error}})
-def get_adopter( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Adopter, Error]:
+def get_adopter(
+    skip: Optional[conint(ge=0)] = 0,
+    limit: Optional[conint(ge=0)]= 1000,
+    rfc: str,
+    street: str = ...,
+    number: int = ...,
+    db: Session = Depends(get_db)
+) -> Union[Adopter, Error]:
   adopter = crud.get_adopter_(skip=skip, limit=limit, db = db)
   return adopter
 
+@app.delete(
+    '/deleteAdopter', response_model=Success, responses={'default': {'model': Error}}
+)
+def delete_delete_adopter(rfc: str) -> Union[Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: it delete records in the table adopters                                                                                                                                           
+    """
+    pass
 
+@app.post(
+    '/insertAdopter',
+    response_model=None,
+    responses={'201': {'model': Success}, 'default': {'model': Error}},
+)
+def post_insert_adopter(
+    adopter: Optional[Adopter] = None,
+) -> Union[None, Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: Insert in the datase one row with adopter schema                                                                                                                                  
+    """
+    pass
+
+  
 @app.get('/animal', response_model=Animal, responses={'default': {'model': Error}})
-def get_animal( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Animal, Error]:
+def get_animal(
+    skip: Optional[conint(ge=0)] = 0,
+    limit: Optional[conint(ge=0)]= 1000,
+    size: Optional[int] = None,
+    body: Optional[int] = None,
+    chest: Optional[int] = None,
+    neck: Optional[int] = None,
+    breed: Optional[constr(min_length=10)] = None,
+    color: Optional[Color] = None,
+    first_image: str = Query(..., alias='firstImage'),
+    sign_date: Optional[datetime] = Query(None, alias='signDate'),
+    status_ind: Optional[conint(ge=0, le=1)] = Query(None, alias='statusInd'),
+    db: Session = Depends(get_db)
+) -> Union[Animal, Error]:
   animal = crud.get_animal_(skip = skip, limit = limit, db = db)
   return animal
 
+@app.delete(
+    '/deleteAnimal', response_model=Success, responses={'default': {'model': Error}}
+)
+def delete_delete_animal() -> Union[Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint : it delete records in the table animal                                                                                                                                            
+    """
+    pass
+
+@app.post(
+    '/insertAnimal',
+    response_model=None,
+    responses={'201': {'model': Success}, 'default': {'model': Error}},
+)
+def post_insert_animal(animal: Optional[Animal] = None) -> Union[None, Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: Insert in the datase one row with animal schema                                                                                                                                   
+    """
+    pass
 
 @app.get(
     '/partnership', response_model=Partnership, responses={'default': {'model': Error}}
 )
-def get_partnership( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Partnership, Error]:
+def get_partnership(
+    skip: Optional[conint(ge=0)] = 0,
+    limit: Optional[conint(ge=0)] = 100,
+    rfc: str,
+    street: str = ...,
+    number: int = ...,
+    db: Session = Depends(get_db)
+) -> Union[Partnership, Error]:
   partnership = crud.get_partnership_(skip = skip, limit = limit, db = db)
   return partnership
 
 
+@app.delete(
+    '/deletePartnership',
+    response_model=Success,
+    responses={'default': {'model': Error}},
+)
+def delete_delete_partnership(rfc: str) -> Union[Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: it delete records in the table partnership                                                                                                                                        
+    """
+    pass
+
+@app.post(
+    '/insertPartnership',
+    response_model=None,
+    responses={'201': {'model': Success}, 'default': {'model': Error}},
+)
+def post_insert_partnership(
+    sociopath: Optional[Partnership] = None,
+) -> Union[None, Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: Insert in the datase one row with partnership schema                                                                                                                              
+    """
+    pass
+
+  
 @app.get(
     '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
-def get_sociopath( skip: int = 0, limit: int= 1000, db: Session = Depends(get_db) ) -> Union[Sociopath, Error]:
+def get_sociopath(
+    skip: Optional[conint(ge=0)] = 0,
+    limit: Optional[conint(ge=0)] = 100,
+    rfc: Optional[str] = None,
+    street: str,
+    number: int = ...,
+    db: Session = Depends(get_db)
+) -> Union[Sociopath, Error]:
   sociopath = crud.get_sociopath_(skip = skip, limit = limit, db = db)
   return sociopath
+
+
+@app.delete(
+    '/deleteSociopath', response_model=Success, responses={'default': {'model': Error}}
+)
+def delete_delete_sociopath() -> Union[Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: it delete records in the table of sociopath                                                                                                                                       
+    """
+    pass
+
+@app.post(
+    '/insertSociopath',
+    response_model=None,
+    responses={'201': {'model': Success}, 'default': {'model': Error}},
+)
+def post_insert_sociopath(
+    sociopath: Optional[Sociopath] = None,
+) -> Union[None, Success, Error]:
+    """                                                                                                                                                                                                     
+    Development endpoint: Insert in the datase one row with sociopath schema                                                                                                                                
+    """
+    pass
+
+
+#street -> calle number -> numero section -> seccion district -> colonia  village -> municipio/alcaldia country -> pais code -> postal
+

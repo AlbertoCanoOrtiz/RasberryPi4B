@@ -5,14 +5,25 @@
 from __future__ import annotations
 
 from datetime import datetime
+from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, conint, constr
+from pydantic import BaseModel, EmailStr, conint, constr
 
+class Success(BaseModel):
+    code: int
+    message: str
 
 class Error(BaseModel):
     code: int
     message: str
+
+class Color(Enum):
+    black = 'black'
+    white = 'white'
+    red = 'red'
+    green = 'green'
+    blue = 'blue'
 
 
 class Animal(BaseModel):
@@ -20,42 +31,76 @@ class Animal(BaseModel):
     body: Optional[conint(ge=0, le=100)] = None
     chest: Optional[conint(ge=0, le=100)] = None
     neck: Optional[conint(ge=0, le=100)] = None
-    breed: constr(regex=r'\w', min_length=10)
+    breed: constr(regex=r'^\w', min_length=10)
+    color: Optional[Color] = None
+    firstImage: Optional[str] = None
+    secondImage: Optional[bytes] = None
+    thirdImage: Optional[str] = None
+    fourthImage: Optional[bytes] = None
+    fifthImage: Optional[str] = None
+    sixthImage: Optional[bytes] = None
+    seventhImage: Optional[str] = None
+    eighthImage: Optional[bytes] = None
+    ninthImage: Optional[str] = None
+    tenthImage: Optional[bytes] = None
     signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
+
 
 
 class Sociopath(BaseModel):
     rfc: Optional[constr(regex=r'[a-zA-Z0-9]+', min_length=13)] = None
     street: constr(regex=r'\w', min_length=1, max_length=100)
     number: int
-    secction: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
+    section: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     district: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     village: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     country: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     code: Optional[int] = None
+    firtsimage: Optional[str] = None
+    secondImage: Optional[bytes] = None
+    thirdImage: Optional[str] = None
     signDate: Optional[datetime] = None
+
 
 
 class Adopter(BaseModel):
     rfc: constr(regex=r'[a-zA-Z0-9]+', min_length=13)
     street: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     number: Optional[int] = None
-    secction: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
+    section: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     district: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     village: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     country: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     code: Optional[int] = None
+    email: Optional[EmailStr] = None
+    telephone: Optional[conint(ge=10, le=10)] = None
+    celphone: Optional[conint(ge=10, le=10)] = None
+    firtsimage: Optional[str] = None
+    secondImage: Optional[bytes] = None
+    thirdImage: Optional[str] = None
     signDate: Optional[datetime] = None
+
 
 
 class Partnership(BaseModel):
     rfc: constr(regex=r'[a-zA-Z0-9]+', min_length=13)
     street: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     number: Optional[int] = None
-    secction: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
+    section: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     district: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     village: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     country: Optional[constr(regex=r'\w', min_length=1, max_length=100)] = None
     code: Optional[int] = None
+    email: Optional[EmailStr] = None
+    telephone: Optional[conint(ge=10, le=10)] = None
+    celphone: Optional[conint(ge=10, le=10)] = None
+    url: Optional[
+        constr(
+            regex=r'^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]{0,61}[A-Za-z0-9])\Z'
+        )
+    ] = None
+    firtsimage: Optional[str] = None
+    secondImage: Optional[bytes] = None
+    thirdImage: Optional[str] = None
     signDate: Optional[datetime] = None
