@@ -1,27 +1,92 @@
 openapi: 3.0.0
 info:
   version: '1.0'
-  title: 'Matcher'
+  title: 'matcher'
 servers:
   - url: 'localhost:3000'
 tags:
-  - name: sociopaths
+  - name: sociopath
     description: People who causing harm or suffering to animals previously adopted.
-  - name: animals
+  - name: animal
     description: Animals in sources like animal shelters and rescue groups.
-  - name: partnerships
+  - name: partnership
     description: Rescue groups. 
-  - name: adopters
+  - name: adopter
     description: People who want pets. 
 paths:
   /animal:
     get: 
-      summary: 'Sample endpoint: Returns details about all animals in the shelter'
+      summary: 'Development endpoint: Returns details about all animals in the shelter'
       tags:
         - animal
+      parameters:
+        - in: query
+          name: skip
+          description : the number of rows skip before starting to count results.
+          schema : 
+            type : integer
+            minimum : 0
+            default : 0
+        - in: query
+          name : limit
+          description : the number max of rows to collect for the result.
+          schema : 
+            type : integer
+            minimum : 0
+            default : 100
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: False
+        - in: query
+          name: body
+          schema:
+            type: integer
+          required: False
+        - in: query
+          name: chest
+          schema:
+            type: integer
+          required: False
+        - in: query
+          name: neck
+          schema:
+            type: integer
+          required: False
+        - in: query
+          name: breed
+          schema:
+            type: string
+            minLength: 10
+          required: False
+        - in : query
+          name: color 
+          schema:
+            $ref : '#/components/schemas/color'
+          required: False
+        - in: query
+          name: firstImage
+          schema:
+            type: string
+            format: byte
+          required : True
+        - in: query
+          name: signDate
+          schema: 
+            type: string
+            format: date-time
+          required: False
+        - in: query
+          name: statusInd
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          required: False
       responses:
         '200':
-          description: 'Sample response: Returns details about'
+          description: 'Development response: Returns details about'
           content: 
             application/json: 
               schema : 
@@ -32,14 +97,85 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /sociopath:
-    get:
-      summary: 'Sample endpoint: Returns details about all sociophats'
-      tags:
-       - sociopath
+  /insertAnimal:
+    post:
+      summary: 'Development endpoint: Insert in the datase one row with animal schema'
+      tags: 
+        - animal
+      parameters : 
+        - in : query
+          name : animal
+          schema: 
+            $ref: '#/components/schemas/animal'
+      responses:
+        '201' : 
+          description: 'Development endpoint : Returns details about'
+          content: 
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error 
+          content :
+            application/json : 
+              schema: 
+                $ref : '#/components/schemas/error'
+  /deleteAnimal: 
+    delete: 
+      summary: 'Development endpoint : it delete records in the table animal'
+      tags: 
+        - animal
       responses:
         '200':
-          description: 'Sample response: Returns details about'
+          description: 'Development endpoint: it returns details about the status of transaction'
+          content:
+            application/json: 
+              schema : 
+                $ref: '#/components/schemas/success'
+        default: 
+          description : Unexpected error
+          content:
+            application/json :
+              schema :
+                $ref : '#/components/schemas/error'
+  /sociopath:
+    get:
+      summary: 'Development endpoint: Returns details about all sociopath'
+      tags:
+       - sociopath
+      parameters:
+        - in : query
+          name : skip
+          description : the number of rows skip before starting to count results.
+          schema :
+            type : integer
+            minimum : 0
+            default : 0
+        - in : query
+          name : limit
+          description : the number of rows to collect for the result.
+          schema :
+            type : integer
+            minimum : 0
+            default : 100
+        - in: query 
+          name: rfc
+          schema:
+            type: string
+          required: False
+        - in : query
+          name: street
+          schema: 
+            type: string
+          required: True
+        - in : query
+          name: number
+          schema:
+            type: integer
+          required: True
+      responses:
+        '200':
+          description: 'Development response: Returns details about'
           content:
             application/json:
               schema:
@@ -50,14 +186,85 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /insertSociopath:
+    post:
+      summary: 'Development endpoint: Insert in the datase one row with sociopath schema'
+      tags: 
+        - sociopath
+      parameters : 
+        - in : query
+          name : sociopath
+          schema: 
+            $ref: '#/components/schemas/sociopath'
+      responses:
+        '201' : 
+          description: 'Development endpoint : Returns details about'
+          content: 
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error 
+          content :
+            application/json : 
+              schema: 
+                $ref : '#/components/schemas/error'
+  /deleteSociopath:
+    delete:
+      summary : 'Development endpoint: it delete records in the table of sociopath'
+      tags:
+        - sociopath
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/success'
+        default :
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
   /adopter:
     get:
-      summary: 'Sample endpoint: Return details about all adopters'
+      summary: 'Development endpoint: Return details about all adopters'
       tags:
         - adopter
+      parameters:
+        - in: query
+          name: skip
+          description : the number of rows skip before starting to count results.
+          schema : 
+            type : integer
+	    minimum : 0
+	    default : 0
+        - in: query
+          name : limit
+          description : the number max of rows to collect for the result.
+          schema : 
+            type : integer
+            minimum : 0
+            default : 100
+        - in: query 
+          name: rfc
+          schema:
+            type: string
+          required: True
+        - in : query
+          name: street
+          schema: 
+            type: string
+          required: True
+        - in : query
+          name: number
+          schema:
+            type: integer
+          required : True
       responses:
         '200':
-          description: 'Sample response: Returns details about'
+          description: 'Development response: Returns details about'
           content:
             application/json:
               schema:
@@ -68,14 +275,91 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /insertAdopter:
+    post:
+      summary: 'Development endpoint: Insert in the datase one row with adopter schema'
+      tags: 
+        - adopter
+      parameters : 
+        - in : query
+          name : adopter
+          schema: 
+            $ref: '#/components/schemas/adopter'
+      responses:
+        '201' : 
+          description: 'Development endpoint : Returns details about'
+          content: 
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error 
+          content :
+            application/json : 
+              schema: 
+                $ref : '#/components/schemas/error'
+  /deleteAdopter:
+    delete:
+      summary: 'Development endpoint: it delete records in the table adopters'
+      tags:
+        - adopter
+      parameters:
+        - in: query 
+          name: rfc
+          schema:
+            type: string
+          required: True
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/success'
+        default :
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
   /partnership:
     get:
-      summary: 'Sample endpoint: Return details about all partnerships'
+      summary: 'Development endpoint: Return details about all partnership'
       tags:
         - partnership
+      parameters:
+        - in: query
+          name: skip
+          description : the number of rows skip before starting to count results.
+          schema : 
+            type : integer
+            minimum : 0
+            default : 0
+        - in: query
+          name : limit
+          description : the number max of rows to collect for the result.
+          schema : 
+            type : integer
+            minimum : 0
+            default : 100
+        - in: query 
+          name: rfc
+          schema:
+            type: string
+          required: True
+        - in : query
+          name: street
+          schema: 
+            type: string
+          required: True
+        - in : query
+          name: number
+          schema:
+            type: integer
+          required : True
       responses:
         '200':
-          description: 'Sample response: Returns details about'
+          description: 'Development response: Returns details about'
           content:
             application/json:
               schema:
@@ -86,8 +370,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /insertPartnership:
+    post:
+      summary: 'Development endpoint: Insert in the datase one row with partnership schema'
+      tags: 
+        - sociopath
+      parameters : 
+        - in : query
+          name : sociopath
+          schema: 
+            $ref: '#/components/schemas/partnership'
+      responses:
+        '201' : 
+          description: 'Development endpoint : Returns details about'
+          content: 
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error 
+          content :
+            application/json : 
+              schema: 
+                $ref : '#/components/schemas/error'
+  /deletePartnership:
+    delete:
+      summary: 'Development endpoint: it delete records in the table partnership'
+      tags:
+        - partnership
+      parameters:
+        - in: query 
+          name: rfc
+          schema:
+            type: string
+          required: True
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/success'
+        default :
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
 components:
   schemas:
+    success:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
     error:
       type: object
       required:
@@ -99,11 +441,18 @@ components:
           format: int32
         message:
           type: string
+    color:
+      type: string
+      enum : 
+        - black
+        - white
+        - red
+        - green 
+        - blue 
     animal:
       type: object
       required: 
         - size
-        - color
         - breed
       properties:
         size:
@@ -128,8 +477,40 @@ components:
           maximum: 100
         breed:
           type: string
-          pattern: '^\d{10}'
+          pattern: '^\w'
           minLength: 10
+        color : 
+          $ref : '#/components/schemas/color'
+        firstImage:
+          type: string
+          format: byte
+        secondImage:
+          type: string
+          format: binary
+        thirdImage:
+          type: string
+          format: byte
+        fourthImage:
+          type: string
+          format: binary
+        fifthImage:
+          type: string
+          format: byte
+        sixthImage:
+          type: string
+          format: binary
+        seventhImage:
+          type: string
+          format: byte
+        eighthImage:
+          type: string
+          format: binary
+        ninthImage:
+          type: string
+          format: byte
+        tenthImage:
+          type: string
+          format: binary
         signDate:
           type: string
           format: date-time
@@ -137,7 +518,7 @@ components:
         statusInd:
           type: boolean
           nullable: false
-    sociophat:    
+    sociopath:    
       type: object 
       required:
         - street
@@ -156,7 +537,7 @@ components:
         number: 
           type: integer
           format: int32
-        secction:
+        section:
           type: string
           pattern: '\w'
           nullable: false
@@ -183,6 +564,15 @@ components:
           type: integer
           pattern: '\d{5}'
           format: int32
+        firtsimage:
+          type: string
+          format: byte
+        secondImage:
+          type: string
+          format: binary
+        thirdImage:
+          type: string
+          format: byte
         signDate:
           type: string
           format: date-time
@@ -205,7 +595,7 @@ components:
         number: 
           type: integer
           format: int32
-        secction:
+        section:
           type: string
           pattern: '\w'
           nullable: false
@@ -232,6 +622,29 @@ components:
           type: integer
           pattern: '\d{5}'
           format: int32
+        email: 
+          type: string
+          format: email
+          nullable: True
+        telephone: 
+          type: integer
+          minimum: 10
+          maximum: 10
+          nullable: True
+        celphone:
+          type: integer
+          minimum: 10
+          maximum: 10
+          nullable: True
+        firtsimage:
+          type: string
+          format: byte
+        secondImage:
+          type: string
+          format: binary
+        thirdImage:
+          type: string
+          format: byte
         signDate:
           type: string
           format: date-time
@@ -254,7 +667,7 @@ components:
         number: 
           type: integer
           format: int32
-        secction:
+        section:
           type: string
           pattern: '\w'
           nullable: false
@@ -281,9 +694,37 @@ components:
           type: integer
           pattern: '\d{5}'
           format: int32
+        email: 
+          type: string
+          format: email
+          nullable: True
+        telephone: 
+          type: integer
+          minimum: 10
+          maximum: 10
+          nullable: True
+        celphone:
+          type: integer
+          minimum: 10
+          maximum: 10
+          nullable: True
+        url:
+          type: string
+          format: hostname
+          nullable : True
+        firtsimage:
+          type: string
+          format: byte
+        secondImage:
+          type: string
+          format: binary
+        thirdImage:
+          type: string
+          format: byte
         signDate:
           type: string
           format: date-time
+          nullable: False
   securitySchemes:
     BasicAuth:
       type: http
