@@ -38,52 +38,40 @@ paths:
           name: size
           schema:
             type: integer
-          required: False
         - in: query
           name: body
           schema:
             type: integer
-          required: False
         - in: query
           name: chest
           schema:
             type: integer
-          required: False
         - in: query
           name: neck
           schema:
             type: integer
-          required: False
         - in: query
           name: breed
           schema:
             type: string
             minLength: 10
-          required: False
         - in : query
           name: color 
           schema:
             $ref : '#/components/schemas/color'
-          required: False
-        - in: query
-          name: firstImage
-          schema:
-            type: string
-            format: byte
-          required : True
         - in: query
           name: signDate
           schema: 
             type: string
             format: date-time
-          required: False
+          required: True
         - in: query
           name: statusInd
           schema:
             type: integer
             minimum: 0
             maximum: 1
-          required: False
+          required: True
       responses:
         '200':
           description: 'Development response: Returns details about'
@@ -107,6 +95,7 @@ paths:
           name : animal
           schema: 
             $ref: '#/components/schemas/animal'
+          required : True
       responses:
         '201' : 
           description: 'Development endpoint : Returns details about'
@@ -138,6 +127,23 @@ paths:
             application/json :
               schema :
                 $ref : '#/components/schemas/error'
+    put: 
+      summary: 'Development endpoint: it endpoint logically deletes the records '
+      tags: 
+        - animal
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content :
+            application/json:
+              schema:
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
   /sociopath:
     get:
       summary: 'Development endpoint: Returns details about all sociopath'
@@ -162,16 +168,46 @@ paths:
           name: rfc
           schema:
             type: string
-          required: False
+        - in : query
+          name: gender
+          schema:
+            type: string
         - in : query
           name: street
           schema: 
             type: string
-          required: True
         - in : query
           name: number
           schema:
             type: integer
+        - in: query
+          name: section
+          schema:
+            type: string
+        - in : query
+          name: district
+          schema:
+            type : string
+        - in: query
+          name: village
+          schema: 
+            type: string
+        - in: query 
+          name: country
+          schema:
+            type: string
+        - in: query
+          name: signDate
+          schema: 
+            type: string
+            format: date-time
+          required: True
+        - in: query
+          name: statusInd
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
           required: True
       responses:
         '200':
@@ -196,6 +232,7 @@ paths:
           name : sociopath
           schema: 
             $ref: '#/components/schemas/sociopath'
+          required : True
       responses:
         '201' : 
           description: 'Development endpoint : Returns details about'
@@ -227,6 +264,23 @@ paths:
             application/json: 
               schema : 
                 $ref : '#/components/schemas/error'
+    put: 
+      summary: 'Development endpoint: it endpoint logically deletes the records '
+      tags: 
+        - sociopath
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content :
+            application/json:
+              schema:
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
   /adopter:
     get:
       summary: 'Development endpoint: Return details about all adopters'
@@ -238,8 +292,8 @@ paths:
           description : the number of rows skip before starting to count results.
           schema : 
             type : integer
-	    minimum : 0
-	    default : 0
+            minimum : 0
+            default : 0
         - in: query
           name : limit
           description : the number max of rows to collect for the result.
@@ -251,17 +305,43 @@ paths:
           name: rfc
           schema:
             type: string
-          required: True
         - in : query
           name: street
           schema: 
             type: string
-          required: True
         - in : query
           name: number
           schema:
             type: integer
-          required : True
+        - in: query
+          name: section
+          schema:
+            type: string
+        - in : query
+          name: district
+          schema:
+            type : string
+        - in: query
+          name: village
+          schema: 
+            type: string
+        - in: query 
+          name: country
+          schema:
+            type: string
+        - in: query
+          name: signDate
+          schema: 
+            type: string
+            format: date-time
+          required: True
+        - in: query
+          name: statusInd
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          required: True
       responses:
         '200':
           description: 'Development response: Returns details about'
@@ -285,6 +365,7 @@ paths:
           name : adopter
           schema: 
             $ref: '#/components/schemas/adopter'
+          required : True
       responses:
         '201' : 
           description: 'Development endpoint : Returns details about'
@@ -322,6 +403,23 @@ paths:
             application/json: 
               schema : 
                 $ref : '#/components/schemas/error'
+    put: 
+      summary: 'Development endpoint: it endpoint logically deletes the records '
+      tags: 
+        - adopter
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content :
+            application/json:
+              schema:
+                $ref : '#/components/schemas/success'
+        default: 
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
   /partnership:
     get:
       summary: 'Development endpoint: Return details about all partnership'
@@ -346,17 +444,43 @@ paths:
           name: rfc
           schema:
             type: string
-          required: True
         - in : query
           name: street
           schema: 
             type: string
-          required: True
         - in : query
           name: number
           schema:
             type: integer
-          required : True
+        - in: query
+          name: section
+          schema:
+            type: string
+        - in : query
+          name: district
+          schema:
+            type : string
+        - in: query
+          name: village
+          schema: 
+            type: string
+        - in: query 
+          name: country
+          schema:
+            type: string
+        - in: query
+          name: signDate
+          schema: 
+            type: string
+            format: date-time
+          required: True
+        - in: query
+          name: statusInd
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          required: True
       responses:
         '200':
           description: 'Development response: Returns details about'
@@ -374,12 +498,13 @@ paths:
     post:
       summary: 'Development endpoint: Insert in the datase one row with partnership schema'
       tags: 
-        - sociopath
+        - partnership
       parameters : 
         - in : query
-          name : sociopath
+          name : partnership
           schema: 
             $ref: '#/components/schemas/partnership'
+          required: True
       responses:
         '201' : 
           description: 'Development endpoint : Returns details about'
@@ -412,6 +537,23 @@ paths:
               schema: 
                 $ref: '#/components/schemas/success'
         default :
+          description: Unexpected error
+          content :
+            application/json: 
+              schema : 
+                $ref : '#/components/schemas/error'
+    put: 
+      summary: 'Development endpoint: it endpoint logically deletes the records '
+      tags: 
+        - partnership
+      responses:
+        '200' :
+          description : 'Development endpoint: it returns details about status of transaction'
+          content :
+            application/json:
+              schema:
+                $ref : '#/components/schemas/success'
+        default: 
           description: Unexpected error
           content :
             application/json: 
@@ -454,6 +596,7 @@ components:
       required: 
         - size
         - breed
+        - color
       properties:
         size:
           type: integer
@@ -513,21 +656,28 @@ components:
           format: binary
         signDate:
           type: string
-          format: date-time
-          nullable: false
         statusInd:
           type: boolean
-          nullable: false
     sociopath:    
       type: object 
       required:
+        - gender
         - street
         - number
+        - section
+        - district
+        - village
+        - country
       properties:
         rfc: 
           type: string
           pattern: '[a-zA-Z0-9]+'
           minLength: 13
+        gender:
+          type: string
+          minLength: 8
+          maxLength: 9
+          nullable: false
         street: 
           type: string
           pattern: '\w'
@@ -541,6 +691,7 @@ components:
           type: string
           pattern: '\w'
           nullable: false
+          default : 'A'
           minLength: 1
           maxLength: 100
         district:
@@ -560,6 +711,7 @@ components:
           pattern: '\w'
           minLength: 1
           maxLength: 100
+          nullable: false
         code:
           type: integer
           pattern: '\d{5}'
@@ -576,15 +728,28 @@ components:
         signDate:
           type: string
           format: date-time
+        statusInd:
+          type: boolean
     adopter:
       type: object
       required: 
        - rfc
+       - street
+       - number
+       - section
+       - district
+       - village
+       - country
       properties:
         rfc: 
           type: string
           pattern: '[a-zA-Z0-9]+'
           minLength: 13
+          nullable: false
+        gender:
+          type: string
+          minLength: 8
+          maxLength: 9
           nullable: false
         street: 
           type: string
@@ -599,6 +764,7 @@ components:
           type: string
           pattern: '\w'
           nullable: false
+          default: 'A'
           minLength: 1
           maxLength: 100
         district:
@@ -648,10 +814,18 @@ components:
         signDate:
           type: string
           format: date-time
+        statusInd:
+          type: boolean
     partnership:
       type: object
       required:
         - rfc
+        - street
+        - number
+        - section
+        - district
+        - village
+        - country
       properties:
         rfc:
           type: string
@@ -671,6 +845,7 @@ components:
           type: string
           pattern: '\w'
           nullable: false
+          default : 'A'
           minLength: 1
           maxLength: 100
         district:
@@ -688,6 +863,7 @@ components:
         country:
           type: string
           pattern: '\w'
+          nullable: false
           minLength: 1
           maxLength: 100
         code:
@@ -725,6 +901,8 @@ components:
           type: string
           format: date-time
           nullable: False
+        statusInd:
+          type: boolean
   securitySchemes:
     BasicAuth:
       type: http
