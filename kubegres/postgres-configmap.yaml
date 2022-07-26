@@ -35,18 +35,18 @@ data:
     GRANT USAGE ON SCHEMA $customSchema TO $customUserName;
     GRANT ALL PRIVILEGES ON SCHEMA $customSchema to $customUserName;
 
-    CREATE TABLE $customSchema.animal(size integer, body integer, chest integer, neck integer, breed varchar(100), "signDate" timestamp without time zone, "statusInd" boolean);
+    CREATE TABLE $customSchema.animal(size integer, body integer, chest integer, neck integer, breed varchar(100), color varchar(100), firstImage bytea, secondImage bytea, thirdImage bytea, fourthImage bytea, fifthImage bytea, sixthImage bytea, seventhImage bytea, eighthImage bytea, ninthImage bytea, tenthImage bytea ,"signDate" timestamp without time zone, "statusInd" boolean);
     
-    CREATE TABLE $customSchema.sociopath(rfc varchar(100), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, signDate timestamp without time zone);
+    CREATE TABLE $customSchema.sociopath(rfc varchar(100), gender varchar(10), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, firtsimage bytea, secondImage bytea, thirdImage bytea, "signDate" timestamp without time zone, "statusInd" boolean);
 
-    CREATE TABLE $customSchema.adopter(rfc varchar(100), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, "signDate" timestamp without time zone);
+    CREATE TABLE $customSchema.adopter(rfc varchar(100), gender varchar(10), street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100),code integer, email varchar(100), telephone numeric(10), celphone numeric(10), firtsimage bytea, secondImage bytea, thirdImage bytea, "signDate" timestamp without time zone, "statusInd" boolean);
 
-    CREATE TABLE $customSchema.partnership(rfc varchar(100),street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, "signDate" timestamp without time zone);
+    CREATE TABLE $customSchema.partnership(rfc varchar(100),street varchar(100), number integer, secction varchar(100), district varchar(100), village varchar(100), country varchar(100), code integer, email varchar(100), telephone numeric(10), celphone  numeric(10), url varchar(100), firtsimage bytea, secondImage bytea, thirdImage bytea, "signDate" timestamp without time zone, "statusInd" boolean);
     
-    INSERT INTO $customSchema.animal VALUES (1, 1, 1, 1, 'PASTOR ALEMAN', to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS') , FALSE);
-    INSERT INTO $customSchema.sociopath VALUES ('','4 MILPAS', 309,'LA AURORA PRIMERA SECCION','ESTADO DE MEXICO', 'NEZAHUALCOYOTL','MEXICO', 08900, to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
-    INSERT INTO $customSchema.adopter VALUES ('CAOA911130HDFNRL05', 'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470, to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
-    INSERT INTO $customSchema.partnership VALUES ('CAOA911130HDFNRL05', 'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470, to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
+    INSERT INTO $customSchema.animal VALUES (1, 1, 1, 1, 'PASTOR ALEMAN', 'black','','' ,'' ,'' ,'' ,'' ,'' ,'' ,'' ,'' , to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS') , FALSE);
+    INSERT INTO $customSchema.sociopath VALUES ('','Masculino','4 MILPAS', 309,'LA AURORA PRIMERA SECCION','ESTADO DE MEXICO', 'NEZAHUALCOYOTL','MEXICO', 08900, '' , '', '' ,to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'), FALSE);
+    INSERT INTO $customSchema.adopter VALUES ('CAOA911130HDFNRL05', 'Masculino' ,'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470,'cano.ortiz.alberto@banorte.com', 5551128243,5539050109 ,'','','',to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
+    INSERT INTO $customSchema.partnership VALUES ('CAOA911130HDFNRL05', 'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470, 'test@gmail.com', 5512839875, 5549040798, 'https://jupyterhub.com', '', '', '',to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
  
     GRANT select, insert, update ON TABLE $customSchema.animal TO $customUserName;
     GRANT select, insert, update ON TABLE $customSchema.sociopath TO $customUserName;
