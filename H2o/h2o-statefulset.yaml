@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: h2o-k8s
-          image:
+          image: h2oai/h2o-open-source-k8s
           resources:
             requests:
               memory: "4Gi"
