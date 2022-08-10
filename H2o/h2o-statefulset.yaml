@@ -11,20 +11,20 @@ spec:
       app: h2o-k8s
   template:
     metadata:
-    labels:
-      app: h2o-k8s
+      labels:
+        app: h2o-k8s
     spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: h2o-k8s
-          image: h2oai/h2o-open-source-k8s
+          image: 19911995/h2o-k8s
           resources:
             requests:
               memory: "4Gi"
           ports:
             - containerPort: 54321
               protocol: TCP
-	  readinessProbe:
+          readinessProbe:
             httpGet:
               path: /kubernetes/isLeaderNode
               port: 8081
@@ -32,7 +32,7 @@ spec:
             periodSeconds: 5
             failureThreshold: 1
           env:
-	  - name: H2O_KUBERNETES_SERVICE_DNS
+          - name: H2O_KUBERNETES_SERVICE_DNS
             value: h2o.service.h2o-statefulset.svc.cluster.local
           - name: H2O_NODE_LOOKUP_TIMEOUT
             value: '180'
