@@ -6,7 +6,9 @@ metadata:
 spec:
   selector:
     app: h2o-k8s
-  type: LoadBalancer
+  type: ClusterIP
+  clusterIP: None
   ports:
   - protocol: TCP
-    port: 54321
+    port: 80
+    targetPort: 54321
