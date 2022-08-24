@@ -34,9 +34,9 @@ def get_db():
 
 @app.get('/adopter', response_model=Adopter, responses={'default': {'model': Error}})
 def get_adopter(
-    skip: Optional[conint(ge=0)] = 0,
-    limit: Optional[conint(ge=0)]= 1000,
     rfc: str,
+    skip: Optional[conint(ge=0)] = 0,
+    limit: Optional[conint(ge=0)] = 1000,
     street: str = ...,
     number: int = ...,
     db: Session = Depends(get_db)
@@ -60,20 +60,21 @@ def delete_delete_adopter(rfc: str) -> Union[Success, Error]:
 )
 def post_insert_adopter(
     adopter: Adopter,
+    db : Session = Depends(get_db)
 ) -> Union[None, Success, Error]:
-    """                                                                                                                                                                                                     
-    Development endpoint: Insert in the datase one row with adopter schema                                                                                                                                  
-    """
-    pass
+    message = crud.post_adopter_(adopter = adopter, db = db)    
+    return message
+    
 
 @app.put(
     '/deleteAdopter', response_model=Success, responses={'default': {'model': Error}}
 )
 def put_delete_adopter() -> Union[Success, Error]:
-    """                                                                                                                                                                                                     
-    Development endpoint: it endpoint logically deletes the records                                                                                                                                         
-    """
-    pass
+  """
+  Development endpoint: 
+
+  """
+  pass
   
 @app.get('/animal', response_model=Animal, responses={'default': {'model': Error}})
 def get_animal(
@@ -107,11 +108,13 @@ def delete_delete_animal() -> Union[Success, Error]:
     response_model=None,
     responses={'201': {'model': Success}, 'default': {'model': Error}},
 )
-def post_insert_animal(animal: Animal ) -> Union[None, Success, Error]:
-    """                                                                                                                                                                                                     
-    Development endpoint: Insert in the datase one row with animal schema                                                                                                                                   
-    """
-    pass
+def post_insert_animal(
+    animal: Animal,
+    db : Session = Depends(get_db)
+) -> Union[None, Success, Error]:
+  message = crud.post_animal_(animal = animal, db= db )
+  return message
+  
 
 @app.put(
     '/deleteAnimal', response_model=Success, responses={'default': {'model': Error}}
@@ -127,9 +130,9 @@ def put_delete_animal() -> Union[Success, Error]:
     '/partnership', response_model=Partnership, responses={'default': {'model': Error}}
 )
 def get_partnership(
+    rfc: str,
     skip: Optional[conint(ge=0)] = 0,
     limit: Optional[conint(ge=0)] = 100,
-    rfc: str,
     street: str = ...,
     number: int = ...,
     db: Session = Depends(get_db)
@@ -156,11 +159,10 @@ def delete_delete_partnership(rfc: str) -> Union[Success, Error]:
 )
 def post_insert_partnership(
     partnership: Partnership,
+    db: Session = Depends(get_db)
 ) -> Union[None, Success, Error]:
-    """                                                                                                                                                                                                     
-    Development endpoint: Insert in the datase one row with partnership schema                                                                                                                              
-    """
-    pass
+  message = crud.post_partnership_(partnership= partnership, db= db )
+  return message
 
 @app.put(
     '/deletePartnership',
@@ -178,10 +180,10 @@ def put_delete_partnership() -> Union[Success, Error]:
     '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
 def get_sociopath(
+    street: str,
     skip: Optional[conint(ge=0)] = 0,
     limit: Optional[conint(ge=0)] = 100,
     rfc: Optional[str] = None,
-    street: str,
     number: int = ...,
     db: Session = Depends(get_db)
 ) -> Union[Sociopath, Error]:
@@ -192,11 +194,12 @@ def get_sociopath(
 @app.delete(
     '/deleteSociopath', response_model=Success, responses={'default': {'model': Error}}
 )
-def delete_delete_sociopath() -> Union[Success, Error]:
-    """                                                                                                                                                                                                     
-    Development endpoint: it delete records in the table of sociopath                                                                                                                                       
-    """
-    pass
+def delete_delete_sociopath(
+    rfc: str,
+    db: Session = Depends(get_db)
+) -> Union[Success, Error]:
+  message = crud.delete_sociopath_(db=db,rfc=rfc)
+  return message
 
 @app.post(
     '/insertSociopath',

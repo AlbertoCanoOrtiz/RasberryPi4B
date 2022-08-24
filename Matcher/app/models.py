@@ -36,15 +36,15 @@ class Animal(BaseModel):
     neck: Optional[conint(ge=0, le=100)] = None
     breed: constr(regex=r'^\w', min_length=10)
     color: Color
-    firstImage: Optional[str] = None
+    firstImage: Optional[bytes] = None
     secondImage: Optional[bytes] = None
-    thirdImage: Optional[str] = None
+    thirdImage: Optional[bytes] = None
     fourthImage: Optional[bytes] = None
-    fifthImage: Optional[str] = None
+    fifthImage: Optional[bytes] = None
     sixthImage: Optional[bytes] = None
-    seventhImage: Optional[str] = None
+    seventhImage: Optional[bytes] = None
     eighthImage: Optional[bytes] = None
-    ninthImage: Optional[str] = None
+    ninthImage: Optional[bytes] = None
     tenthImage: Optional[bytes] = None
     signDate: Optional[str] = None
     statusInd: Optional[bool] = None
@@ -60,9 +60,9 @@ class Sociopath(BaseModel):
     village: constr(regex=r'\w', min_length=1, max_length=100)
     country: constr(regex=r'\w', min_length=1, max_length=100)
     code: Optional[int] = None
-    firtsimage: Optional[str] = None
+    firstImage: Optional[bytes] = None
     secondImage: Optional[bytes] = None
-    thirdImage: Optional[str] = None
+    thirdImage: Optional[bytes] = None
     signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
 
@@ -80,9 +80,9 @@ class Adopter(BaseModel):
     email: Optional[EmailStr] = None
     telephone: Optional[conint(ge=10, le=10)] = None
     celphone: Optional[conint(ge=10, le=10)] = None
-    firtsimage: Optional[str] = None
+    firstImage: Optional[bytes] = None
     secondImage: Optional[bytes] = None
-    thirdImage: Optional[str] = None
+    thirdImage: Optional[bytes] = None
     signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
 
@@ -97,15 +97,15 @@ class Partnership(BaseModel):
     country: constr(regex=r'\w', min_length=1, max_length=100)
     code: Optional[int] = None
     email: Optional[EmailStr] = None
-    telephone: Optional[conint(ge=10, le=10)] = None
-    celphone: Optional[conint(ge=10, le=10)] = None
+    telephone: Optional[conint(ge=1000000000, le=9999999999)] = None
+    celphone: Optional[conint(ge=1000000000, le=9999999999)] = None
     url: Optional[
         constr(
-            regex=r'^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]{0,61}[A-Za-z0-9])\Z'
+            regex=r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)\Z'
         )
     ] = None
-    firtsimage: Optional[str] = None
+    firstImage: Optional[bytes] = None
     secondImage: Optional[bytes] = None
-    thirdImage: Optional[str] = None
+    thirdImage: Optional[bytes] = None
     signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
