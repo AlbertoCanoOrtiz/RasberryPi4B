@@ -91,7 +91,7 @@ def get_animal(
     status_ind: Optional[conint(ge=0, le=1)] = Query(None, alias='statusInd'),
     db: Session = Depends(get_db)
 ) -> Union[Animal, Error]:
-  animal = crud.get_animal_(skip = skip, limit = limit, db = db)
+  animal = crud.get_animal_(breed = breed, color = color, skip = skip, limit = limit, db = db)
   return animal
 
 @app.delete(
@@ -137,7 +137,7 @@ def get_partnership(
     number: int = ...,
     db: Session = Depends(get_db)
 ) -> Union[Partnership, Error]:
-  partnership = crud.get_partnership_(skip = skip, limit = limit, db = db)
+  partnership = crud.get_partnership_(rfc = rfc, street = street, number= number, skip = skip, limit = limit, db = db)
   return partnership
 
 

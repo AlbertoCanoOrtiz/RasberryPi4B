@@ -46,7 +46,7 @@ class Animal(BaseModel):
     eighthImage: Optional[bytes] = None
     ninthImage: Optional[bytes] = None
     tenthImage: Optional[bytes] = None
-    signDate: Optional[str] = None
+    signDate: Optional[datetime] = None
     statusInd: Optional[bool] = None
 
 
