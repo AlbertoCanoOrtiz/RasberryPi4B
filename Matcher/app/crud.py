@@ -4,7 +4,22 @@ import models, schemas
 import json
 
 def get_adopter_(db: Session, rfc: str, gender str, street: str, number: int , skip: int = 0, limit: int = 1000 ):
-  db_adopter = db.query(schemas.Adopter).offset(skip).limit(limit).all()
+
+  if gender and street and number: 
+    db_adopter = db.query(schemas.Adopter).filter(schemas.Adopter.rfc == rfc).filter(schemas.Adopter.gender == gender).filter(schemas.Adoptar.street == street).filter(schemas.Adopter.number == number ).offset(skip).limit(limit).first()
+  elif gender:
+    db_adopter = db.query(schemas.Adopter).filter(schemas.Adopter.rfc == rfc).filter(schemas.Adopter.gender == gender).offset(skip).limit(limit).first()
+  elif street: 
+    db_adopter = db.query(schemas.Adopter).filter(schemas.Adopter.rfc == rfc).filter(schemas.Adopter.street == street).offset(skip).limit(limit).first()
+  else:
+    db_adopter = db.query(schemas.Adopter).filter(schemas.Adopter.rfc == rfc).offset(skip).limit(limit).first()
+
+  if db_adopter is None:
+    raise HTTPException(status_code= 404, detail='NOT FOUND')
+
+  db_adopter = db_adopter.__dict__
+  del db_adopter['_sa_instance_state']
+  
   return db_adopter
 
 def get_animal_( db: Session, breed : str , color: str, skip: int  = 0, limit: int = 1000 ):
@@ -50,15 +65,16 @@ def get_sociopath_( db: Session, skip: int = 0, limit: int= 1000 ):
   del db_sociopath['_sa_instance_state']
   return db_sociopath
 
+
 def post_adopter_(db : Session, adopter : schemas.Adopter ):
+  adopter = schemas.adopter(rfc= , gender= , street= , number= , section= , district= , village= , country= , code= , email= , telphone= , celphone= , firstImage= , secondImage= , thirdImage= , signDate= , statusInd=  )
   db.add(adopter)
   db.commit()
   db.refresh(adopter)
   return {'200' : 'This is a test only in the case of show in the screen; itwill be the way to pint codes' }
 
-def post_animal_(db : Session, animal  : schemas.Animal ):
-  animal= 
-  
+def post_animal_(db : Session, animal : schemas.Animal ):
+  animal= schemas.Animal(size=animal.size, body=animal.body, chest=animal.chest, neck=animal.neck, breed=animal.breed, color=animal.color, firstImage=animal.firstImage, secondImage=animal.secondImage, thirdImage=animal.thirdImage, fourthImage=animal.fourthImage, fifthImage=animal.fifthImage, sixthImage=animal.sixthImage, seventhImage=animal.seventhImage, eighthImage=animal.eighthImage, ninthImage=animal.ninthImage, tenthImage=animal.tenthImage, signDate=animal.signDate, statusInd=animal.statusInd )
   db.add(animal)
   db.commit()
   db.refresh(animal)
@@ -73,6 +89,8 @@ def post_partnership_(db : Session, partnership : schemas.Partnership ):
   return {'200' : 'This is a test only in the case of show in the screen; itwill be the way to pint codes' }
 
 def post_sociopath_(db : Session, sociopath : schemas.Sociopath ):
+
+  sociopath = schemas.Sociopath(rfc=  , gender= , street= , number= , section= , district= , village= , country= , code= , secondImage= , thirdImage= , signDate= , statusInd=  )
   db.add(sociopath)
   db.commit()
   db.refresh()
