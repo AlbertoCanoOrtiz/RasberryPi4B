@@ -180,14 +180,14 @@ def put_delete_partnership() -> Union[Success, Error]:
     '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
 def get_sociopath(
-    street: str,
+    gender: str = ...,
+    street: str = ...,
     skip: Optional[conint(ge=0)] = 0,
     limit: Optional[conint(ge=0)] = 100,
-    rfc: Optional[str] = None,
     number: int = ...,
     db: Session = Depends(get_db)
 ) -> Union[Sociopath, Error]:
-  sociopath = crud.get_sociopath_(skip = skip, limit = limit, db = db)
+  sociopath = crud.get_sociopath_(gender= gender, street= street, number= number, code=code, skip= skip, limit= limit, db = db)
   return sociopath
 
 
@@ -195,10 +195,14 @@ def get_sociopath(
     '/deleteSociopath', response_model=Success, responses={'default': {'model': Error}}
 )
 def delete_delete_sociopath(
-    rfc: str,
+    gender: str,
+    street: str,
+    number: int,
+    code: int,
+    rfc: Optional[str] = None,
     db: Session = Depends(get_db)
 ) -> Union[Success, Error]:
-  message = crud.delete_sociopath_(db=db,rfc=rfc)
+  message = crud.delete_sociopath_(db=db, rfc=rfc, gender=gender, street=street, number=number, code=code)
   return message
 
 @app.post(
