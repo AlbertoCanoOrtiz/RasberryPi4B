@@ -48,10 +48,10 @@ data:
     INSERT INTO $customSchema.adopter VALUES ('CAOA911130HDFNRL05', 'Masculino' ,'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470,'cano.ortiz.alberto@banorte.com', 5551128243,5539050109 ,'','','',to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
     INSERT INTO $customSchema.partnership VALUES ('CAOA911130HDFNRL05', 'ROSA DE CASTILLA', 51, 'MOLINOS', 'CIUDAD DE MEXICO', 'ALVARO OBREGON', 'MEXICO', 01470, 'test@gmail.com', 5512839875, 5549040798, 'https://jupyterhub.com', '', '', '',to_timestamp('1900-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'));
  
-    GRANT select, insert, update ON TABLE $customSchema.animal TO $customUserName;
-    GRANT select, insert, update ON TABLE $customSchema.sociopath TO $customUserName;
-    GRANT select, insert, update ON TABLE $customSchema.adopter TO $customUserName;
-    GRANT select, insert, update ON TABLE $customSchema.partnership TO $customUserName;
+    GRANT select, insert, update, delete ON TABLE $customSchema.animal TO $customUserName;
+    GRANT select, insert, update, delete ON TABLE $customSchema.sociopath TO $customUserName;
+    GRANT select, insert, update, delete ON TABLE $customSchema.adopter TO $customUserName;
+    GRANT select, insert, update, delete ON TABLE $customSchema.partnership TO $customUserName;
 
     EOSQL
 
