@@ -175,10 +175,9 @@ def update_animal_(db: Session, breed : str , color: str, skip: int  = 0, limit:
       db_animal = db_animal.filter(it[0]==it[1])
 
   if db_animal.first() is None:
-    message = post_animal()
+    message = post_animal_()
   else: 
-    db_animal.
-    db_animal.delete()
+    db_animal.filter().update({}, )
 
   db.commit()
   return models.Success(code='200', message='this is a test in the case of show in the screen; it will be the way to print codes')
@@ -191,10 +190,10 @@ def update_adopter_(db: Session, rfc: str, gender: str, street: str, number: int
       db_adopter = db_adopter.filter(it[0]==it[1])
 
   if db_adopter.first() is None:
-    ...
-  else :
-    ...
-    db_adopter.delete()
+    raise HTTPException(status_code=404, detail='NOT FOUND')
+
+  db_adopter.update(dict(schema.Adopter.statusInd=1))
+  
   db.commit()
   return models.Success(code='200', message='this is a test in the case of show in the screen; it will be the way to print codes')
 
@@ -205,10 +204,9 @@ def update_partnership_(db: Session, rfc: str, street: str, number: int, skip: i
       db_partnership = db_partnership.filter(it[0]==it[1])
 
   if db_partnership.first() is None:
-    ...
+    message = post_partnership_()
   else:
-    ...
-    db_partnership.delete()
+    db_partnership.filter().update({}, )
   db.commit()
   return models.Success(code='200', message='this is a test in the case of show in the screen; it will be the way to print codes')
 
@@ -220,10 +218,9 @@ def update_sociopath_(db: Session, rfc: str, gender: str, street: str, number: i
       db_sociopath = db_sociopath.filter(it[0]==it[1])
 
   if db_sociopath.first() is None:
-    ...
+    message= post_sociopath_()
   else:
-    ...
-    db_sociopath.delete()
+    db_sociopath.filter().update({}, )
   db.commit()
   return models.Success(code='200' ,  message='This is a test only in the case of show in the screen; it will be the way to pint codes' )
 
