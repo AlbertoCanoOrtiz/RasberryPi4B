@@ -37,12 +37,13 @@ def get_adopter(
     rfc: str,
     skip: Optional[conint(ge=0)] = 0,
     limit: Optional[conint(ge=0)] = 1000,
+    gender: str = ...,
     street: str = ...,
     number: int = ...,
     db: Session = Depends(get_db)
 ) -> Union[Adopter, Error]:
   
-  adopter = crud.get_adopter_(skip=skip, limit=limit, db = db)
+  adopter = crud.get_adopter_(rfc=rfc,gender=gender,street=street,number=number,skip=skip,limit=limit, db = db)
 
   return adopter
 
@@ -72,7 +73,7 @@ def post_insert_adopter(
     db : Session = Depends(get_db)
 ) -> Union[None, Success, Error]:
 
-  message = crud.post_adopter_(adopter = adopter, db = db)    
+  message = crud.post_adopter_(Adopter = adopter, db = db)    
 
   return message
     
@@ -90,7 +91,7 @@ def put_delete_adopter(
     db : Session = Depends(get_db)
 ) -> Union[Success, Error]:
 
-  message = crud.update_adopter_(db=db, rfc=rfc, gender=gender, street=street, number=number , skip=skip, limit=limit):
+  message = crud.update_adopter_(db=db, rfc=rfc, gender=gender, street=street, number=number , skip=skip, limit=limit)
 
   return message
   
@@ -125,7 +126,7 @@ def delete_delete_animal(
     db: Session = Depends(get_db)
 ) -> Union[Success, Error]:
 
-  message = crud.delete_animal_(db = db, breed = breed, color = color, skip= skip, limit = limit):
+  message = crud.delete_animal_(db = db, breed = breed, color = color, skip= skip, limit = limit)
 
   return message 
 
@@ -192,7 +193,7 @@ def delete_delete_partnership(
     db: Session = Depends(get_db)
 ) -> Union[Success, Error]:
 
-  message = crud.delete_partnership_(db= db, rfc= rfc, street= street, number= number, skip= skip, limit= limit):
+  message = crud.delete_partnership_(db= db, rfc= rfc, street= street, number= number, skip= skip, limit= limit)
 
   return message  
 
@@ -233,6 +234,7 @@ def put_delete_partnership(
     '/sociopath', response_model=Sociopath, responses={'default': {'model': Error}}
 )
 def get_sociopath(
+    code: int = ...,
     gender: str = ...,
     street: str = ...,
     skip: Optional[conint(ge=0)] = 0,
@@ -273,7 +275,7 @@ def post_insert_sociopath(
 
 ) -> Union[None, Success, Error]:
   
-  message =  crud.post_sociopath_(db = db, sociopath = sociopath ):
+  message =  crud.post_sociopath_(db = db, Sociopath = sociopath )
 
   return message
 
@@ -292,7 +294,7 @@ def put_delete_sociopath(
 
 ) -> Union[Success, Error]:
 
-  message = crud.update_sociopath_(db: Session, rfc= rfc, gender= gender, street= street, number= number, code= code, skip= skip, limit= limit)
+  message = crud.update_sociopath_(db= db, rfc= rfc, gender= gender, street= street, number= number, code= code, skip= skip, limit= limit)
 
   return message
 

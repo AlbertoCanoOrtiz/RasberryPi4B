@@ -78,8 +78,8 @@ class Adopter(BaseModel):
     country: constr(regex=r'\w', min_length=1, max_length=100)
     code: Optional[int] = None
     email: Optional[EmailStr] = None
-    telephone: Optional[conint(ge=10, le=10)] = None
-    celphone: Optional[conint(ge=10, le=10)] = None
+    telephone: Optional[conint(ge=1000000000, le=9999999999)] = None
+    celphone: Optional[conint(ge=1000000000, le=9999999999)] = None
     firstImage: Optional[bytes] = None
     secondImage: Optional[bytes] = None
     thirdImage: Optional[bytes] = None
